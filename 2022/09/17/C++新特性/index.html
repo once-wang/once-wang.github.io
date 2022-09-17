@@ -1,0 +1,187 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>C++新特性 | Once's Blog</title><meta name="keywords" content="秋招,C++"><meta name="author" content="Once Wang"><meta name="copyright" content="Once Wang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="C++11&amp;#x65B0;&amp;#x7279;&amp;#x6027;C++&amp;#x65B0;&amp;#x7279;&amp;#x6027;&amp;#x4E3B;&amp;#x8981;&amp;#x5305;&amp;#x62EC;&amp;#x5305;&amp;#x542B;&amp;#x8BED;&amp;#x6CD5;&amp;#x6539;&amp;#x8FDB;&amp;#x548C;&amp;#x6807;&amp;#x51C6;&amp;#x5E93;&amp;#x6269;&amp;#x5145;&amp;#x4E24;&amp;#x4E2A;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++新特性">
+<meta property="og:url" content="https://once-wang.github.io/2022/09/17/C++%E6%96%B0%E7%89%B9%E6%80%A7/index.html">
+<meta property="og:site_name" content="Once&#39;s Blog">
+<meta property="og:description" content="C++11&amp;#x65B0;&amp;#x7279;&amp;#x6027;C++&amp;#x65B0;&amp;#x7279;&amp;#x6027;&amp;#x4E3B;&amp;#x8981;&amp;#x5305;&amp;#x62EC;&amp;#x5305;&amp;#x542B;&amp;#x8BED;&amp;#x6CD5;&amp;#x6539;&amp;#x8FDB;&amp;#x548C;&amp;#x6807;&amp;#x51C6;&amp;#x5E93;&amp;#x6269;&amp;#x5145;&amp;#x4E24;&amp;#x4E2A;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2022-09-17T07:30:00.000Z">
+<meta property="article:modified_time" content="2022-09-17T08:05:00.000Z">
+<meta property="article:author" content="Once Wang">
+<meta property="article:tag" content="秋招">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://once-wang.github.io/2022/09/17/C++%E6%96%B0%E7%89%B9%E6%80%A7/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'C++新特性',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-09-17 16:05:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">28</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Once's Blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">C++新特性</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-09-17T07:30:00.000Z" title="发表于 2022-09-17 15:30:00">2022-09-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-09-17T08:05:00.000Z" title="更新于 2022-09-17 16:05:00">2022-09-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A7%8B%E6%8B%9B/">秋招</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="C++新特性"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="C-11&#x65B0;&#x7279;&#x6027;"><a href="#C-11&#x65B0;&#x7279;&#x6027;" class="headerlink" title="C++11&#x65B0;&#x7279;&#x6027;"></a>C++11&#x65B0;&#x7279;&#x6027;</h2><p>C++&#x65B0;&#x7279;&#x6027;&#x4E3B;&#x8981;&#x5305;&#x62EC;&#x5305;&#x542B;&#x8BED;&#x6CD5;&#x6539;&#x8FDB;&#x548C;&#x6807;&#x51C6;&#x5E93;&#x6269;&#x5145;&#x4E24;&#x4E2A;&#x65B9;&#x9762;&#xFF0C;&#x4E3B;&#x8981;&#x5305;&#x62EC;&#x4EE5;&#x4E0B;11&#x70B9;&#xFF1A;<br><strong>&#x8BED;&#x6CD5;&#x6539;&#x8FDB;</strong></p>
+<ol>
+<li>&#x7EDF;&#x4E00;&#x7684;&#x521D;&#x59CB;&#x5316;&#x65B9;&#x6CD5;</li>
+<li>&#x6210;&#x5458;&#x53D8;&#x91CF;&#x9ED8;&#x8BA4;&#x521D;&#x59CB;&#x5316;</li>
+<li><strong>auto&#x5173;&#x952E;&#x5B57;</strong>&#xFF0C;&#x7528;&#x4E8E;&#x5B9A;&#x4E49;&#x53D8;&#x91CF;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x53EF;&#x4EE5;&#x81EA;&#x52A8;&#x5224;&#x65AD;&#x7684;&#x7C7B;&#x578B;&#xFF08;&#x524D;&#x63D0;&#xFF1A;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;&#x65F6;&#x5BF9;&#x5176;&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#xFF09;</li>
+<li><strong>decltype&#xFF0C;&#x6C42;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x7F16;&#x8BD1;&#x671F;&#x8FDB;&#x884C;&#x81EA;&#x52A8;&#x7C7B;&#x578B;&#x63A8;&#x5BFC;</strong>&#xFF1B;</li>
+<li><strong>&#x667A;&#x80FD;&#x6307;&#x9488; shared_ptr</strong></li>
+<li>&#x7A7A;&#x6307;&#x9488; nullptr&#xFF08;&#x539F;&#x6765;NULL&#xFF09;</li>
+<li>&#x57FA;&#x4E8E;&#x8303;&#x56F4;&#x7684;for&#x5FAA;&#x73AF;</li>
+<li>&#x53F3;&#x503C;&#x5F15;&#x7528;&#x548C;move&#x8BED;&#x4E49;&#xFF0C;&#x8BA9;&#x7A0B;&#x5E8F;&#x5458;&#x6709;&#x610F;&#x8BC6;&#x51CF;&#x5C11;&#x8FDB;&#x884C;&#x6DF1;&#x62F7;&#x8D1D;&#x64CD;&#x4F5C;<br><strong>&#x6807;&#x51C6;&#x5E93;&#x6269;&#x5145;</strong>&#xFF08;&#x5F80;STL&#x91CC;&#x65B0;&#x52A0;&#x8FDB;&#x4E00;&#x4E9B;&#x6A21;&#x677F;&#x7C7B;&#xFF0C;&#x6BD4;&#x8F83;&#x597D;&#x7528;&#xFF09;</li>
+<li>&#x65E0;&#x5E8F;&#x5BB9;&#x5668;&#xFF08;&#x54C8;&#x5E0C;&#x8868;&#xFF09;&#x7528;&#x6CD5;&#x548C;&#x529F;&#x80FD;&#x540C;map&#x4E00;&#x6A21;&#x4E00;&#x6837;&#xFF0C;&#x533A;&#x522B;&#x5728;&#x4E8E;&#x54C8;&#x5E0C;&#x8868;&#x7684;&#x6548;&#x7387;&#x66F4;&#x9AD8;</li>
+<li>&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#xFF0C;&#x53EF;&#x4EE5;&#x8BA4;&#x4E3A;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x672C;&#x8D28;&#x4E0A;&#x662F;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x8BE5;&#x5B57;&#x7B26;&#x4E32;&#x63CF;&#x8FF0;&#x4E86;&#x4E00;&#x79CD;&#x7279;&#x5B9A;&#x6A21;&#x5F0F;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x3002;</li>
+<li>Lambda&#x8868;&#x8FBE;&#x5F0F;&#xFF08;&#x533F;&#x540D;&#x51FD;&#x6570;&#xFF09;</li>
+</ol>
+<ul>
+<li>&#x5F53;&#x7C7B;&#x578B;&#x4E0D;&#x4E3A;&#x5F15;&#x7528;&#x65F6;&#xFF0C;auto&#x7684;&#x63A8;&#x5BFC;&#x7ED3;&#x679C;&#x5C06;&#x4E0D;&#x4FDD;&#x7559;&#x8868;&#x8FBE;&#x5F0F;&#x7684; const &#x5C5E;&#x6027;&#xFF1B;&#x5F53;&#x7C7B;&#x578B;&#x4E3A;&#x5F15;&#x7528;&#x65F6;&#xFF0C;auto &#x7684;&#x63A8;&#x5BFC;&#x7ED3;&#x679C;&#x5C06;&#x4FDD;&#x7559;&#x8868;&#x8FBE;&#x5F0F;&#x7684; const &#x5C5E;&#x6027;&#x3002;</li>
+<li>&#x591A;&#x4E2A;shared_ptr&#x667A;&#x80FD;&#x6307;&#x9488;&#x53EF;&#x4EE5;&#x5171;&#x540C;&#x4F7F;&#x7528;&#x540C;&#x4E00;&#x5757;&#x5806;&#x5185;&#x5B58;&#x3002;&#x5E76;&#x4E14;&#xFF0C;&#x7531;&#x4E8E;&#x8BE5;&#x7C7B;&#x578B;&#x667A;&#x80FD;&#x6307;&#x9488;&#x5728;&#x5B9E;&#x73B0;&#x4E0A;&#x91C7;&#x7528;&#x7684;&#x662F;<strong>&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x673A;&#x5236;</strong>&#xFF0C;&#x5373;&#x4FBF;&#x6709;&#x4E00;&#x4E2A;shared_ptr&#x6307;&#x9488;&#x653E;&#x5F03;&#x4E86;&#x5806;&#x5185;&#x5B58;&#x7684;&#x201C;&#x4F7F;&#x7528;&#x6743;&#x201D;&#xFF08;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x51CF; 1&#xFF09;&#xFF0C;&#x4E5F;&#x4E0D;&#x4F1A;&#x5F71;&#x54CD;&#x5176;&#x4ED6;&#x6307;&#x5411;&#x540C;&#x4E00;&#x5806;&#x5185;&#x5B58;&#x7684;shared_ptr&#x6307;&#x9488;&#xFF08;<strong>&#x53EA;&#x6709;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x4E3A; 0 &#x65F6;&#xFF0C;&#x5806;&#x5185;&#x5B58;&#x624D;&#x4F1A;&#x88AB;&#x81EA;&#x52A8;&#x91CA;&#x653E;</strong>&#xFF09;&#x3002;</li>
+<li>nullptr &#x662F; nullptr_t &#x7C7B;&#x578B;&#x7684;&#x53F3;&#x503C;&#x5E38;&#x91CF;&#xFF0C;&#x4E13;&#x7528;&#x4E8E;<strong>&#x521D;&#x59CB;&#x5316;&#x7A7A;&#x7C7B;&#x578B;&#x6307;&#x9488;</strong>&#x3002;nullptr_t &#x662F; C++11 &#x65B0;&#x589E;&#x52A0;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF0C;&#x53EF;&#x79F0;&#x4E3A;&#x201C;&#x6307;&#x9488;&#x7A7A;&#x503C;&#x7C7B;&#x578B;&#x201D;&#xFF0C;<strong>nullptr&#x53EF;&#x4EE5;&#x88AB;&#x9690;&#x5F0F;&#x8F6C;&#x6362;&#x6210;&#x4EFB;&#x610F;&#x7684;&#x6307;&#x9488;&#x7C7B;&#x578B;</strong>&#x3002;&#x901A;&#x8FC7;&#x5C06;&#x6307;&#x9488;&#x521D;&#x59CB;&#x5316;&#x4E3A; nullptr&#xFF0C;&#x53EF;&#x4EE5;&#x5F88;&#x597D;&#x5730;&#x89E3;&#x51B3; NULL &#x9057;&#x7559;&#x7684;&#x95EE;&#x9898;&#x3002;</li>
+<li>&#x53F3;&#x503C;&#x5F15;&#x7528;&#xFF0C;&#x7528; &#x201C;&amp;&amp;&#x201D; &#x8868;&#x793A;&#xFF0C;<strong>&#x53F3;&#x503C;&#x5F15;&#x7528;&#x5FC5;&#x987B;&#x7ACB;&#x5373;&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#x64CD;&#x4F5C;&#xFF0C;&#x4E14;&#x53EA;&#x80FD;&#x4F7F;&#x7528;&#x53F3;&#x503C;&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#xFF0C;&#x53F3;&#x503C;&#x5F15;&#x7528;&#x53EF;&#x4EE5;&#x5BF9;&#x53F3;&#x503C;&#x8FDB;&#x884C;&#x4FEE;&#x6539;</strong>&#x3002;</li>
+<li>move &#x672C;&#x610F;&#x4E3A; &#x201C;&#x79FB;&#x52A8;&#x201D;&#xFF0C;&#x4F46;&#x8BE5;&#x51FD;&#x6570;&#x5E76;&#x4E0D;&#x80FD;&#x79FB;&#x52A8;&#x4EFB;&#x4F55;&#x6570;&#x636E;&#xFF0C;&#x5B83;&#x7684;&#x529F;&#x80FD;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x5C31;&#x662F;<strong>&#x5C06;&#x67D0;&#x4E2A;&#x5DE6;&#x503C;&#x5F3A;&#x5236;&#x8F6C;&#x5316;&#x4E3A;&#x53F3;&#x503C;</strong>&#x3002;&#x57FA;&#x4E8E; move() &#x51FD;&#x6570;&#x7279;&#x6B8A;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x5176;&#x5E38;&#x7528;&#x4E8E;&#x5B9E;&#x73B0;&#x79FB;&#x52A8;&#x8BED;&#x4E49;&#x3002;</li>
+<li>lambda&#x7684;mutable&#x5173;&#x952E;&#x5B57;&#x53EF;&#x4EE5;&#x7701;&#x7565;&#xFF0C;&#x5982;&#x679C;&#x4F7F;&#x7528;&#x5219;&#x4E4B;&#x524D;&#x7684; () &#x5C0F;&#x62EC;&#x53F7;&#x5C06;&#x4E0D;&#x80FD;&#x7701;&#x7565;&#x3002;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5BF9;&#x4E8E;&#x4EE5;&#x503C;&#x4F20;&#x9012;&#x65B9;&#x5F0F;&#x5F15;&#x5165;&#x7684;&#x5916;&#x90E8;&#x53D8;&#x91CF;&#xFF0C;&#x4E0D;&#x5141;&#x8BB8;&#x5728; lambda &#x8868;&#x8FBE;&#x5F0F;&#x5185;&#x90E8;&#x4FEE;&#x6539;&#x5B83;&#x4EEC;&#x7684;&#x503C;&#xFF08;const&#xFF09;&#x3002;&#x5982;&#x679C;&#x60F3;&#x4FEE;&#x6539;&#x5B83;&#x4EEC;&#xFF0C;&#x5C31;&#x5FC5;&#x987B;&#x4F7F;&#x7528; mutable &#x5173;&#x952E;&#x5B57;&#x3002;<strong>&#x5BF9;&#x4E8E;&#x4EE5;&#x503C;&#x4F20;&#x9012;&#x65B9;&#x5F0F;&#x5F15;&#x5165;&#x7684;&#x5916;&#x90E8;&#x53D8;&#x91CF;&#xFF0C;lambda &#x8868;&#x8FBE;&#x5F0F;&#x4FEE;&#x6539;&#x7684;&#x662F;&#x62F7;&#x8D1D;&#x7684;&#x90A3;&#x4E00;&#x4EFD;</strong>&#xFF0C;&#x5E76;&#x4E0D;&#x4F1A;&#x4FEE;&#x6539;&#x771F;&#x6B63;&#x7684;&#x5916;&#x90E8;&#x53D8;&#x91CF;&#xFF1B;</li>
+<li><strong>noexcept&#x5173;&#x952E;&#x5B57;&#x8868;&#x660E;&#x51FD;&#x6570;&#x4F53;&#x5185;&#x4E0D;&#x4F1A;&#x629B;&#x51FA;&#x4EFB;&#x4F55;&#x5F02;&#x5E38;</strong>&#xFF0C;&#x4F7F;&#x7528;throw()&#x53EF;&#x4EE5;&#x5236;&#x5B9A;lambda&#x51FD;&#x6570;&#x5185;&#x90E8;&#x53EF;&#x4EE5;&#x629B;&#x51FA;&#x7684;&#x5F02;&#x5E38;&#x7C7B;&#x578B;&#x3002;</li>
+<li>&#x5982;&#x679C; lambda &#x51FD;&#x6570;&#x4F53;&#x5185;&#x53EA;&#x6709;&#x4E00;&#x4E2A; return &#x8BED;&#x53E5;&#xFF0C;&#x6216;&#x8005;&#x8BE5;&#x51FD;&#x6570;&#x8FD4;&#x56DE; void&#xFF0C;&#x5219;&#x7F16;&#x8BD1;&#x5668;&#x53EF;&#x4EE5;&#x81EA;&#x884C;&#x63A8;&#x65AD;&#x51FA;&#x8FD4;&#x56DE;&#x503C;&#x7C7B;&#x578B;&#xFF0C;&#x6B64;&#x60C5;&#x51B5;&#x4E0B;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x7701;&#x7565;&#x201D;-&gt; &#x8FD4;&#x56DE;&#x503C;&#x7C7B;&#x578B;&#x201D;&#x3002;</li>
+</ul>
+<h2 id="&#x667A;&#x80FD;&#x6307;&#x9488;&#x548C;&#x6307;&#x9488;&#x7684;&#x533A;&#x522B;"><a href="#&#x667A;&#x80FD;&#x6307;&#x9488;&#x548C;&#x6307;&#x9488;&#x7684;&#x533A;&#x522B;" class="headerlink" title="&#x667A;&#x80FD;&#x6307;&#x9488;&#x548C;&#x6307;&#x9488;&#x7684;&#x533A;&#x522B;"></a>&#x667A;&#x80FD;&#x6307;&#x9488;&#x548C;&#x6307;&#x9488;&#x7684;&#x533A;&#x522B;</h2><ul>
+<li>&#x667A;&#x80FD;&#x6307;&#x9488;&#xFF1A;unique_ptr&#x3001;shared_ptr&#x548C;weak_ptr&#xFF0C;&#x53EF;&#x4E0E;STL&#x5BB9;&#x5668;&#x548C;&#x79FB;&#x52A8;&#x8BED;&#x4E49;&#x534F;&#x540C;&#x5DE5;&#x4F5C;&#x3002;</li>
+<li>&#x6307;&#x9488;&#xFF1A;&#x6307;&#x9488;&#x53D8;&#x91CF;&#x662F;&#x4E13;&#x95E8;&#x7528;&#x6765;&#x5B58;&#x653E;&#x5730;&#x5740;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x5FC5;&#x987B;&#x5C06;&#x5B83;&#x5B9A;&#x4E49;&#x4E3A;&#x201C;&#x6307;&#x9488;&#x7C7B;&#x578B;&#x201D;&#x3002;</li>
+<li>&#x533A;&#x522B;&#xFF1A;&#x667A;&#x80FD;&#x6307;&#x9488;&#x5B9E;&#x9645;&#x4E0A;&#x662F;<strong>&#x5BF9;&#x666E;&#x901A;&#x6307;&#x9488;&#x52A0;&#x4E86;&#x4E00;&#x5C42;&#x5C01;&#x88C5;&#x673A;&#x5236;&#xFF0C;&#x533A;&#x522B;&#x662F;&#x5B83;&#x8D1F;&#x8D23;&#x81EA;&#x52A8;&#x91CA;&#x653E;&#x6240;&#x6307;&#x7684;&#x5BF9;&#x8C61;</strong>&#xFF0C;&#x4F7F;&#x5F97;&#x667A;&#x80FD;&#x6307;&#x9488;&#x53EF;&#x4EE5;&#x65B9;&#x4FBF;&#x7684;&#x7BA1;&#x7406;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x7684;&#x751F;&#x547D;&#x671F;&#x3002;</li>
+</ul>
+<p><strong>unique_ptr</strong>&#xFF1A;&#x5B9E;&#x73B0;<strong>&#x72EC;&#x5360;&#x5F0F;&#x62E5;&#x6709;</strong>&#x6216;&#x4E25;&#x683C;&#x62E5;&#x6709;&#x6982;&#x5FF5;&#xFF0C;&#x4FDD;&#x8BC1;<strong>&#x540C;&#x4E00;&#x65F6;&#x95F4;&#x5185;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x667A;&#x80FD;&#x6307;&#x9488;&#x53EF;&#x4EE5;&#x6307;&#x5411;&#x8BE5;&#x5BF9;&#x8C61;</strong>&#x3002;&#x91C7;&#x7528;&#x6240;&#x6709;&#x6743;&#x6A21;&#x5F0F;&#x3002;&#x8BD5;&#x56FE;&#x5C06;&#x4E00;&#x4E2A;unique_ptr&#x8D4B;&#x503C;&#x7ED9;&#x53E6;&#x4E00;&#x4E2A;&#x65F6;&#xFF0C;&#x5982;&#x679C;&#x6E90;unique_ptr&#x662F;&#x4E2A;&#x4E34;&#x65F6;&#x53F3;&#x503C;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x5141;&#x8BB8;&#x8FD9;&#x4E48;&#x505A;&#xFF1B;&#x5982;&#x679C;&#x6E90;unique_ptr&#x5C06;&#x5B58;&#x5728;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x5C06;&#x7981;&#x6B62;&#x8FD9;&#x4E48;&#x505A;&#x3002;</p>
+<p>&#x5B9E;&#x73B0;&#x539F;&#x7406;&#xFF1A;&#x5C06;&#x62F7;&#x8D1D;&#x6784;&#x9020;&#x51FD;&#x6570;&#x548C;&#x62F7;&#x8D1D;&#x8D4B;&#x503C;&#x8FD0;&#x7B97;&#x7B26;&#x7533;&#x660E;&#x4E3A;private&#x6216;delete&#x3002;<strong>&#x4E0D;&#x5141;&#x8BB8;&#x62F7;&#x8D1D;&#x6784;&#x9020;&#x51FD;&#x6570;&#x548C;&#x8D4B;&#x503C;&#x64CD;&#x4F5C;&#x7B26;</strong>&#xFF0C;&#x4F46;&#x662F;&#x652F;&#x6301;&#x79FB;&#x52A8;&#x6784;&#x9020;&#x51FD;&#x6570;&#xFF0C;&#x901A;&#x8FC7;std:move&#x628A;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x6307;&#x9488;&#x53D8;&#x6210;&#x53F3;&#x503C;&#x4E4B;&#x540E;&#x53EF;&#x4EE5;&#x79FB;&#x52A8;&#x7ED9;&#x53E6;&#x4E00;&#x4E2A;unique_ptr&#x3002;</p>
+<p><strong>shared_ptr</strong>&#xFF1A;&#x5B9E;&#x73B0;<strong>&#x5171;&#x4EAB;&#x5F0F;&#x62E5;&#x6709;</strong>&#x6982;&#x5FF5;&#x3002;&#x591A;&#x4E2A;&#x667A;&#x80FD;&#x6307;&#x9488;&#x53EF;&#x4EE5;&#x6307;&#x5411;&#x76F8;&#x540C;&#x5BF9;&#x8C61;&#xFF0C;<strong>&#x8BE5;&#x5BF9;&#x8C61;&#x548C;&#x5176;&#x76F8;&#x5173;&#x8D44;&#x6E90;&#x4F1A;&#x5728;&#x201C;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5F15;&#x7528;&#x88AB;&#x9500;&#x6BC1;&#x201D;&#x65F6;&#x5019;&#x91CA;&#x653E;</strong>&#x3002;&#x5B83;&#x4F7F;&#x7528;&#x8BA1;&#x6570;&#x673A;&#x5236;&#x6765;&#x8868;&#x660E;&#x8D44;&#x6E90;&#x88AB;&#x51E0;&#x4E2A;&#x6307;&#x9488;&#x5171;&#x4EAB;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x6210;&#x5458;&#x51FD;&#x6570;<strong>use_count</strong>()&#x6765;&#x67E5;&#x770B;&#x8D44;&#x6E90;&#x7684;&#x6240;&#x6709;&#x8005;&#x4E2A;&#x6570;&#x3002;&#x9664;&#x4E86;&#x901A;&#x8FC7;new&#x6765;&#x6784;&#x9020;&#xFF0C;&#x8FD8;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4F20;&#x5165;auto_ptr, unique_ptr,weak_ptr&#x6765;&#x6784;&#x9020;&#x3002;&#x5F53;&#x8C03;&#x7528;release()&#x65F6;&#xFF0C;&#x5F53;&#x524D;&#x6307;&#x9488;&#x4F1A;&#x91CA;&#x653E;&#x8D44;&#x6E90;&#x6240;&#x6709;&#x6743;&#xFF0C;&#x8BA1;&#x6570;&#x51CF;&#x4E00;&#x3002;&#x5F53;&#x8BA1;&#x6570;&#x7B49;&#x4E8E;0&#x65F6;&#xFF0C;&#x8D44;&#x6E90;&#x4F1A;&#x88AB;&#x91CA;&#x653E;&#x3002;</p>
+<p><strong>weak_ptr</strong>&#xFF1A;weak_ptr&#x662F;&#x4E00;&#x79CD;<strong>&#x4E0D;&#x63A7;&#x5236;&#x5BF9;&#x8C61;&#x751F;&#x547D;&#x5468;&#x671F;</strong>&#x7684;&#x667A;&#x80FD;&#x6307;&#x9488;&#xFF0C;&#x5B83;<strong>&#x6307;&#x5411;&#x4E00;&#x4E2A;shared_ptr&#x7BA1;&#x7406;&#x7684;&#x5BF9;&#x8C61;</strong>&#x3002;&#x8FDB;&#x884C;&#x8BE5;&#x5BF9;&#x8C61;&#x7684;&#x5185;&#x5B58;&#x7BA1;&#x7406;&#x7684;&#x662F;&#x90A3;&#x4E2A;&#x5F3A;&#x5F15;&#x7528;&#x7684;shared_ptr&#xFF0C;weak_ptr&#x53EA;&#x662F;&#x63D0;&#x4F9B;&#x4E86;&#x5BF9;&#x7BA1;&#x7406;&#x5BF9;&#x8C61;&#x7684;&#x4E00;&#x4E2A;&#x8BBF;&#x95EE;&#x624B;&#x6BB5;&#x3002;<strong>weak_ptr&#x53EF;&#x4EE5;&#x68C0;&#x6D4B;&#x5230;&#x6240;&#x7BA1;&#x7406;&#x7684;&#x5BF9;&#x8C61;&#x662F;&#x5426;&#x5DF2;&#x7ECF;&#x88AB;&#x91CA;&#x653E;&#xFF0C;&#x4ECE;&#x800C;&#x907F;&#x514D;&#x975E;&#x6CD5;&#x8BBF;&#x95EE;</strong>&#x3002;weak_ptr&#x662F;&#x7528;&#x6765;&#x89E3;&#x51B3;shared_ptr&#x76F8;&#x4E92;&#x5F15;&#x7528;&#x65F6;&#x7684;&#x6B7B;&#x9501;&#x95EE;&#x9898;&#xFF0C;&#x5982;&#x679C;&#x8BF4;&#x4E24;&#x4E2A;shared_ptr&#x76F8;&#x4E92;&#x5F15;&#x7528;&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x4E24;&#x4E2A;&#x6307;&#x9488;&#x7684;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x6C38;&#x8FDC;&#x4E0D;&#x53EF;&#x80FD;&#x4E0B;&#x964D;&#x4E3A;0&#xFF0C;&#x8D44;&#x6E90;&#x6C38;&#x8FDC;&#x4E0D;&#x4F1A;&#x91CA;&#x653E;&#x3002;&#x5B83;&#x662F;&#x5BF9;&#x5BF9;&#x8C61;&#x7684;&#x4E00;&#x79CD;<strong>&#x5F31;&#x5F15;&#x7528;&#xFF0C;&#x4E0D;&#x4F1A;&#x589E;&#x52A0;&#x5BF9;&#x8C61;&#x7684;&#x5F15;&#x7528;&#x8BA1;&#x6570;</strong>&#xFF0C;shared_ptr&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x8D4B;&#x503C;&#x7ED9;&#x5B83;&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;<strong>&#x901A;&#x8FC7;&#x8C03;&#x7528;lock&#x51FD;&#x6570;&#x6765;&#x83B7;&#x5F97;shared_ptr</strong>&#x3002;&#x4E0D;&#x80FD;&#x901A;&#x8FC7;weak_ptr&#x76F4;&#x63A5;&#x8BBF;&#x95EE;&#x5BF9;&#x8C61;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x5E94;&#x8BE5;&#x5148;&#x628A;&#x5B83;&#x8F6C;&#x5316;&#x4E3A;shared_ptr&#x3002;</p>
+<h2 id="shared-ptr&#x7684;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x6027;"><a href="#shared-ptr&#x7684;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x6027;" class="headerlink" title="shared_ptr&#x7684;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x6027;"></a>shared_ptr&#x7684;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x6027;</h2><p>&#x591A;&#x7EBF;&#x7A0B;&#x73AF;&#x5883;&#x4E0B;&#xFF0C;&#x8C03;&#x7528;&#x4E0D;&#x540C;shared_ptr&#x5B9E;&#x4F8B;&#x7684;&#x6210;&#x5458;&#x51FD;&#x6570;&#x662F;&#x4E0D;&#x9700;&#x8981;&#x989D;&#x5916;&#x7684;&#x540C;&#x6B65;&#x624B;&#x6BB5;&#x7684;&#xFF0C;&#x5373;&#x4F7F;&#x8FD9;&#x4E9B;shared_ptr&#x62E5;&#x6709;&#x7684;&#x662F;&#x540C;&#x6837;&#x7684;&#x5BF9;&#x8C61;&#x3002;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x540C;&#x65F6;<strong>&#x8BFB;&#x540C;&#x4E00;&#x4E2A;shared_ptr&#x5BF9;&#x8C61;&#x662F;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;</strong>&#xFF0C;&#x4F46;&#x662F;&#x5982;&#x679C;&#x662F;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;<strong>&#x5BF9;&#x540C;&#x4E00;&#x4E2A;shared_ptr&#x5BF9;&#x8C61;&#x8FDB;&#x884C;&#x8BFB;&#x548C;&#x5199;&#xFF0C;&#x5219;&#x9700;&#x8981;&#x52A0;&#x9501;</strong>&#x3002;&#x591A;&#x7EBF;&#x7A0B;<strong>&#x8BFB;&#x5199;shared_ptr&#x6240;&#x6307;&#x5411;&#x7684;&#x540C;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x4E0D;&#x7BA1;&#x662F;&#x76F8;&#x540C;&#x7684;shared_ptr&#x5BF9;&#x8C61;&#xFF0C;&#x8FD8;&#x662F;&#x4E0D;&#x540C;&#x7684;shared_ptr&#x5BF9;&#x8C61;&#xFF0C;&#x4E5F;&#x9700;&#x8981;&#x52A0;&#x9501;&#x4FDD;&#x62A4;</strong>&#x3002;</p>
+<h2 id="C-11&#x4E2D;&#x56DB;&#x79CD;&#x7C7B;&#x578B;&#x8F6C;&#x6362;"><a href="#C-11&#x4E2D;&#x56DB;&#x79CD;&#x7C7B;&#x578B;&#x8F6C;&#x6362;" class="headerlink" title="C++11&#x4E2D;&#x56DB;&#x79CD;&#x7C7B;&#x578B;&#x8F6C;&#x6362;"></a>C++11&#x4E2D;&#x56DB;&#x79CD;&#x7C7B;&#x578B;&#x8F6C;&#x6362;</h2><ol>
+<li><strong>const_cast</strong>&#xFF1A;&#x5C06;const&#x53D8;&#x91CF;&#x8F6C;&#x4E3A;&#x975E;const&#x3002;</li>
+<li><strong>static_cast</strong>&#xFF1A;&#x53EF;&#x4EE5;&#x7528;&#x4E8E;&#x5404;&#x79CD;&#x9690;&#x5F0F;&#x8F6C;&#x6362;&#xFF0C;&#x6BD4;&#x5982;&#x975E;const&#x8F6C;const&#xFF0C;static_cast&#x53EF;&#x4EE5;&#x7528;&#x4E8E;&#x7C7B;&#x5411;&#x4E0A;&#x8F6C;&#x6362;&#xFF0C;&#x5411;&#x4E0B;&#x8F6C;&#x6362;&#x80FD;&#x6210;&#x529F;&#x4F46;&#x662F;&#x4E0D;&#x5B89;&#x5168;&#x3002;</li>
+<li><strong>dynamic_cast</strong>&#xFF1A;&#x53EA;&#x80FD;&#x7528;&#x4E8E;<strong>&#x542B;&#x6709;&#x865A;&#x51FD;&#x6570;&#x7684;&#x7C7B;&#x8F6C;&#x6362;</strong>&#xFF0C;&#x7528;&#x4E8E;&#x7C7B;&#x5411;&#x4E0A;&#x548C;&#x5411;&#x4E0B;&#x8F6C;&#x6362;&#xFF0C;&#x5F53;&#x7236;&#x7C7B;&#x8F6C;&#x6362;&#x6210;&#x5B50;&#x7C7B;&#x65F6;&#x53EF;&#x80FD;&#x51FA;&#x73B0;&#x975E;&#x6CD5;&#x5185;&#x5B58;&#x8BBF;&#x95EE;&#x7684;&#x95EE;&#x9898;&#x3002;dynamic_cast&#x901A;&#x8FC7;<strong>&#x5224;&#x65AD;&#x53D8;&#x91CF;&#x8FD0;&#x884C;&#x65F6;&#x7C7B;&#x578B;&#x548C;&#x8981;&#x8F6C;&#x6362;&#x7684;&#x7C7B;&#x578B;&#x662F;&#x5426;&#x76F8;&#x540C;</strong>&#x6765;&#x5224;&#x65AD;&#x662F;&#x5426;&#x80FD;&#x591F;&#x5411;&#x4E0B;&#x8F6C;&#x6362;&#xFF0C;&#x7C7B;&#x578B;&#x76F8;&#x7B49;&#x6210;&#x529F;&#x8F6C;&#x6362;&#xFF0C;&#x7C7B;&#x578B;&#x4E0D;&#x7B49;&#x8F6C;&#x6362;&#x5931;&#x8D25;&#x3002;</li>
+<li><strong>reinterpret_cast</strong>&#xFF1A;&#x53EF;&#x4EE5;&#x505A;&#x4EFB;&#x4F55;&#x7C7B;&#x578B;&#x7684;&#x8F6C;&#x6362;&#xFF0C;&#x4F46;<strong>&#x4E0D;&#x5BF9;&#x8F6C;&#x6362;&#x7ED3;&#x679C;&#x4FDD;&#x8BC1;</strong>&#xFF0C;&#x5BB9;&#x6613;&#x51FA;&#x95EE;&#x9898;&#x3002;</li>
+</ol>
+<h2 id="&#x53EF;&#x53D8;&#x53C2;&#x6570;&#x6A21;&#x677F;"><a href="#&#x53EF;&#x53D8;&#x53C2;&#x6570;&#x6A21;&#x677F;" class="headerlink" title="&#x53EF;&#x53D8;&#x53C2;&#x6570;&#x6A21;&#x677F;"></a>&#x53EF;&#x53D8;&#x53C2;&#x6570;&#x6A21;&#x677F;</h2><p>&#x53EF;&#x53D8;&#x53C2;&#x6570;&#x6A21;&#x677F;(variadic template)&#x4F7F;&#x5F97;&#x80FD;&#x591F;&#x521B;&#x5EFA;&#xFF0C;<strong>&#x53EF;&#x63A5;&#x53D7;&#x53EF;&#x53D8;&#x6570;&#x91CF;&#x53C2;&#x6570;</strong>&#x7684;&#x6A21;&#x677F;&#x51FD;&#x6570;&#x548C;&#x6A21;&#x677F;&#x7C7B;&#x3002;&#xFF08;1&#xFF09;&#x6A21;&#x677F;&#x53C2;&#x6570;&#x5305;&#xFF08;parameter pack&#xFF09;&#xFF1B;&#xFF08;2&#xFF09;&#x51FD;&#x6570;&#x53C2;&#x6570;&#x5305;&#xFF1B;&#xFF08;3&#xFF09;&#x5C55;&#x5F00;&#xFF08;unpack&#xFF09;&#x53C2;&#x6570;&#x5305;&#xFF1B;&#xFF08;4&#xFF09;&#x9012;&#x5F52;&#x3002;</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://once-wang.github.io">Once Wang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://once-wang.github.io/2022/09/17/C++%E6%96%B0%E7%89%B9%E6%80%A7/">https://once-wang.github.io/2022/09/17/C++%E6%96%B0%E7%89%B9%E6%80%A7/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://once-wang.github.io" target="_blank">Once's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%A7%8B%E6%8B%9B/">秋招</a><a class="post-meta__tags" href="/tags/C/">C++</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/09/16/STL/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">STL</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Once Wang</div><div class="author-info__description">Live Once, Once Life</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">28</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/once-wang"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#C-11%E6%96%B0%E7%89%B9%E6%80%A7"><span class="toc-number">1.</span> <span class="toc-text">C++11新特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E5%92%8C%E6%8C%87%E9%92%88%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">2.</span> <span class="toc-text">智能指针和指针的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#shared-ptr%E7%9A%84%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E6%80%A7"><span class="toc-number">3.</span> <span class="toc-text">shared_ptr的线程安全性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-11%E4%B8%AD%E5%9B%9B%E7%A7%8D%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-number">4.</span> <span class="toc-text">C++11中四种类型转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E6%A8%A1%E6%9D%BF"><span class="toc-number">5.</span> <span class="toc-text">可变参数模板</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/09/17/C++%E6%96%B0%E7%89%B9%E6%80%A7/" title="C++新特性">C++新特性</a><time datetime="2022-09-17T07:30:00.000Z" title="发表于 2022-09-17 15:30:00">2022-09-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/09/16/STL/" title="STL">STL</a><time datetime="2022-09-16T07:42:00.000Z" title="发表于 2022-09-16 15:42:00">2022-09-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/09/16/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" title="面向对象">面向对象</a><time datetime="2022-09-16T03:00:00.000Z" title="发表于 2022-09-16 11:00:00">2022-09-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/09/15/C++%E5%86%85%E5%AD%98/" title="C++内存">C++内存</a><time datetime="2022-09-15T08:45:00.000Z" title="发表于 2022-09-15 16:45:00">2022-09-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/09/15/C++%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" title="C++语言基础">C++语言基础</a><time datetime="2022-09-15T03:00:00.000Z" title="发表于 2022-09-15 11:00:00">2022-09-15</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 By Once Wang</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">What can I hold you with?</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
